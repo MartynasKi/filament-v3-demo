@@ -28,8 +28,10 @@ class ProductResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('price')
+                    ->label('Price (EUR, min 0.01)')
                     ->required()
-                    ->numeric(),
+                    ->numeric()
+                    ->minValue(0.01),
             ]);
     }
 
@@ -37,9 +39,15 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('price'),
+                Tables\Columns\TextColumn::make('name')
+                    ->sortable()
+                    ->searchable()
+                    ->label('Product Name'),
+                Tables\Columns\TextColumn::make('price')
+                    ->sortable()
+                    ->money(currency: 'eur')
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])
