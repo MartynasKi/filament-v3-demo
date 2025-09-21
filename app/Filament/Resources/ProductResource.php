@@ -37,6 +37,8 @@ class ProductResource extends Resource
                     ->label('Status')
                     ->required()
                     ->options(ProductStatusEnum::class),
+                Forms\Components\Select::make('category_id')
+                    ->relationship('category', 'name'),
             ]);
     }
 
@@ -54,7 +56,10 @@ class ProductResource extends Resource
                     ->label('Price'),
                 Tables\Columns\SelectColumn::make('status')
                     ->options(ProductStatusEnum::class)
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('category.name')
                     ->sortable()
+                    ->searchable()
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
