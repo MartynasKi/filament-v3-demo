@@ -52,7 +52,8 @@ class ProductResource extends Resource
                     ->sortable()
                     ->money(currency: 'eur')
                     ->label('Price'),
-                Tables\Columns\TextColumn::make('status')
+                Tables\Columns\SelectColumn::make('status')
+                    ->options(ProductStatusEnum::class)
                     ->sortable()
             ])
             ->defaultSort('created_at', 'desc')

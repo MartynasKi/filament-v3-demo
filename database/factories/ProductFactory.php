@@ -19,7 +19,7 @@ class ProductFactory extends Factory
     {
         return [
             'name' => $this->faker->words(2, true),
-            'price' => $this->faker->randomNumber(3, true),
+            'price' => $this->faker->randomFloat(2, 0.01, 1000),
             'status' => $this->faker->randomElement(ProductStatusEnum::cases()),
         ];
     }
