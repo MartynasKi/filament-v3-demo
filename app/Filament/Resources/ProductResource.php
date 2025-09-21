@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Enums\ProductStatusEnum;
 
 class ProductResource extends Resource
 {
@@ -32,6 +33,10 @@ class ProductResource extends Resource
                     ->required()
                     ->numeric()
                     ->minValue(0.01),
+                Forms\Components\Radio::make('status')
+                    ->label('Status')
+                    ->required()
+                    ->options(ProductStatusEnum::class),
             ]);
     }
 
@@ -46,6 +51,9 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('price')
                     ->sortable()
                     ->money(currency: 'eur')
+                    ->label('Price'),
+                Tables\Columns\TextColumn::make('status')
+                    ->sortable()
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([

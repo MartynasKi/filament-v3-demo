@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Enums\ProductStatusEnum;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
@@ -19,6 +20,7 @@ class ProductFactory extends Factory
         return [
             'name' => $this->faker->words(2, true),
             'price' => $this->faker->randomNumber(3, true),
+            'status' => $this->faker->randomElement(ProductStatusEnum::cases()),
         ];
     }
 }
